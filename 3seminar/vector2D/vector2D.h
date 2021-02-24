@@ -16,7 +16,7 @@ public:
     friend std::istream &operator>>(std::istream &in, Vector2D &V);
     //+ - *
     friend Vector2D operator+(const Vector2D &V1, const Vector2D &V2);
-    friend Vector2D &operator+(const Vector2D &V);
+    friend Vector2D &operator+(Vector2D &V);
     friend Vector2D operator-(const Vector2D &V1, const Vector2D &V2);
     friend Vector2D operator-(const Vector2D &V);
     friend Vector2D operator*(const Vector2D &V, const double &N);

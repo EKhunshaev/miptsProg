@@ -41,7 +41,7 @@ Vector2D operator+(const Vector2D &V1, const Vector2D &V2) {
     return Vector2D(V1.x + V2.x, V1.y + V2.y);
 }
 
-Vector2D &operator+(const Vector2D &V) {
+Vector2D &operator+(Vector2D &V) {
     return V;
 }
 
@@ -139,14 +139,14 @@ bool operator<=(const Vector2D &V1, const Vector2D &V2) {
     return (V1.x + V1.y) <= (V2.x + V2.y);
 }
 
-friend bool operator&&(const Vector2D &V1, const Vector2D &V2) {
+bool operator&&(const Vector2D &V1, const Vector2D &V2) {
     return (V1.x * V1.x + V1.y * V1.y) && (V2.x * V2.x + V2.y * V2.y);
 }
 
-friend bool operator||(const Vector2D &V1, const Vector2D &V2) {
+bool operator||(const Vector2D &V1, const Vector2D &V2) {
     return (V1.x * V1.x + V1.y * V1.y) || (V2.x * V2.x + V2.y * V2.y);
 }
 
-friend bool operator!(const Vector2D &V) {
+bool operator!(const Vector2D &V) {
     return (V.x * V.x + V.y * V.y) == 0;
 }
