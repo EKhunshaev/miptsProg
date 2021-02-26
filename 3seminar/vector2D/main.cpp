@@ -29,7 +29,10 @@ int main() {
 
     std::cout << "V1 == V3 => " << (V1 == V3) << std::endl;
     std::cout << "V1 * 3 == V3 => " << (V1 * 3 == V3) << std::endl;
-
+    Vector2D V0;
+    std::cout << "V1 && (0,0) => " << (V1 && V0) << std::endl;
+    std::cout << "V1 || (0,0) => " << (V1 || V0) << std::endl;
+    std::cout << "!V1 => " << !V1 << std::endl;
 
     return 0;
 }
