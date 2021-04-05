@@ -31,7 +31,7 @@
 #include <stdlib.h>
 #include <math.h>
 
-#define MAX_SIZE 5
+#define MAX_SIZE 650000
 int main() {
 
     //Использование #pragma omp parallel вывод Hello world
@@ -62,13 +62,13 @@ int main() {
     //Напрямую
     double time = omp_get_wtime();
     for (int i = 0; i < MAX_SIZE; i++) {
-        a[i] = rand() % 101;
-        b[i] = rand() % 1001;
-        c[i] = a[i] + b[i];
+        a[i] = i;
+        b[i] = MAX_SIZE - i;
+        c[i] = (a[i] + b[i]) / (a[i] * a[i] + b[i] * b[i]);
     }
     printf("Напрямую заняло %lf мс\n", (omp_get_wtime() - time) * 1000);
 
-    for (int i = 0; i < MAX_SIZE; ++i) {
+    for (int i = 0; i < 10; ++i) {
         printf("%d ", c[i]);
     }
     printf("\n");
@@ -81,14 +81,14 @@ int main() {
         n = omp_get_num_threads();
         int cur = omp_get_thread_num();
         for (int i = floor(cur * MAX_SIZE / n); i < floor((cur + 1) * MAX_SIZE / n); i++) {
-            a[i] = rand() % 73;
-            b[i] = rand() % 27;
-            c[i] = a[i] + b[i];
+            a[i] = MAX_SIZE - i;
+            b[i] = i;
+            c[i] = (a[i] - b[i]) / (a[i] * a[i] + b[i] * b[i]);
         }
     };
     printf("Pragma omp parallel заняло %lf мс\n", (omp_get_wtime() - time) * 1000);
 
-    for (int i = 0; i < MAX_SIZE; ++i) {
+    for (int i = 0; i < 10; ++i) {
         printf("%d ", c[i]);
     }
     printf("\n");
@@ -97,15 +97,17 @@ int main() {
     time = omp_get_wtime();
 #pragma omp parallel for //omp parallel for распараллеливает цикл for
     for (int i = 0; i < MAX_SIZE; i++) {
-        a[i] = rand() % 17;
-        b[i] = rand() % 113;
-        c[i] = a[i] + b[i];
+        a[i] = i;
+        b[i] = i + i;
+        c[i] = (a[i] + b[i]) * (a[i] * a[i] + b[i] * b[i]);
     }
     printf("Pragma omp parallel for заняло %lf мс\n", (omp_get_wtime() - time) * 1000);
 
-    for (int i = 0; i < MAX_SIZE; ++i) {
+    for (int i = 0; i < 10; ++i) {
         printf("%d ", c[i]);
     }
     printf("\n");
     return 0;
 }
+
+//В лучшем случае выходит ~ 5 2 и 1.4 мс соответственно
