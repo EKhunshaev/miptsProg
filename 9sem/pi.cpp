@@ -43,7 +43,7 @@ int main() {
 
     arrPi[0] = arrPi[1] = arrPi[2] = arrPi[3] = 0;
     time = omp_get_wtime();
-#pragma parallel for
+#pragma omp parallel for
     for (int i = 1; i <= (int) n; i++) {
         arrPi[omp_get_thread_num()] += 4 / n * sqrt(1 - i / n * i / n);
     }
