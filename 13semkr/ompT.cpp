@@ -59,5 +59,6 @@ int main () {
         exit(EXIT_FAILURE);
     }
 
+    output.close();
     return 0;
 }
